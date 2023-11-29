@@ -66,10 +66,6 @@ class MainActivity : AppCompatActivity() {
                         tvResultado.text = "Error al analizar la respuesta del servidor"
                     }
                 }
-
-
-
-
             }
         })
     }
