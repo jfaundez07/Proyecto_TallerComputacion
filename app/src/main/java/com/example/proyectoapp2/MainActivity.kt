@@ -5,6 +5,7 @@ import android.os.Bundle
 
 import android.widget.Button
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import com.google.gson.Gson
 import okhttp3.*
 import java.io.IOException
@@ -45,34 +46,50 @@ class MainActivity : AppCompatActivity() {
             override fun onResponse(call: Call, response: Response) {
                 val jsonData = response.body?.string()
 
-                if (jsonData!= null) {
+                if (jsonData != null) {
                     val gson = Gson()
                     val datosSensores = gson.fromJson(jsonData, DatosSensores::class.java)
 
+                    val temperatura = datosSensores.Temperatura
 
-                    val resultadoFormateado =   " Ultima lectura obtenida: \n" +
-                                                "\n"+
-                                                "-> Temperatura:   ${datosSensores.Temperatura} °C\n" +
-                                                "-> Humedad:        ${datosSensores.Humedad} %\n" +
-                                                "-> PM25:               ${datosSensores.PM25} [ug/m3]\n" +
-                                                "-> PM10:               ${datosSensores.PM10} [ug/m3]"
+                    if (temperatura != null) {
+                        val resultadoFormateado =
+                            " Ultima lectura obtenida: \n" +
+                                    "\n" +
+                                    "-> Temperatura:   $temperatura °C\n" +
+                                    "-> Humedad:        ${datosSensores.Humedad} %\n" +
+                                    "-> PM25:               ${datosSensores.PM25} [ug/m3]\n" +
+                                    "-> PM10:               ${datosSensores.PM10} [ug/m3]"
 
-                    runOnUiThread {
-                        tvResultado.text = resultadoFormateado
-                    }
+                        runOnUiThread {
+                            tvResultado.text = resultadoFormateado
+                        }
 
-                } else {
-                    runOnUiThread {
-                        tvResultado.text = "Error al analizar la respuesta del servidor"
+                        // Verificar si la temperatura es 55 o superior
+                        if (temperatura >= 35) {
+                            // Mostrar una alerta o ventana emergente
+                            mostrarAlerta("Temperatura Alta", "La temperatura es $temperatura °C. ¡Cuidado!")
+                        }
+                    } else {
+                        runOnUiThread {
+                            tvResultado.text = "Error al analizar la respuesta del servidor"
+                        }
                     }
                 }
-
-
-
-
             }
+
         })
     }
+
+    private fun mostrarAlerta(titulo: String, mensaje: String) {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle(titulo)
+        builder.setMessage(mensaje)
+        builder.setPositiveButton("OK", null)
+        val dialog = builder.create()
+        dialog.show()
+    }
+
 
     data class DatosSensores(
         val Temperatura: Double?,
