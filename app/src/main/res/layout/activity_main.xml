@@ -179,6 +179,26 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="UnknownId" />
 
+    <TextView
+        android:id="@+id/dato8"
+        android:layout_width="321dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="5dp"
+        android:background="#b4ff9a"
+        android:gravity="center"
+        android:radius="1000dp"
+        android:textColor="@color/black"
+        android:textSize="24dp"
+        android:layout_below="@id/dato7"
+        app:layout_constraintBottom_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="UnknownId" />
+
     <ImageView
         android:id                          ="@+id/imgCirculoSuperior"
         android:layout_width                ="425dp"
