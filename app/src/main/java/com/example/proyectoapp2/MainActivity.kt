@@ -81,7 +81,7 @@ class MainActivity : AppCompatActivity() {
                         }
 
 
-                        if (temperatura >= 50) {
+                        if (temperatura >= 30) {
                             val handler = Handler(Looper.getMainLooper())
                             handler.post {
                                 mostrarAlerta("Temperatura Alta", "La temperatura es $temperatura °C")
