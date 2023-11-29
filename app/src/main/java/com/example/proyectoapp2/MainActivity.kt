@@ -1,10 +1,9 @@
-package com.example.proyectojota
+package com.example.proyectoapp2
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import android.view.LayoutInflater
 import com.example.proyectoapp2.databinding.ActivityMainBinding
 import okhttp3.*
 import java.io.IOException
