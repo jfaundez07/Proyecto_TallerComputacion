@@ -2,21 +2,28 @@ package com.example.proyectoapp2
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.proyectoapp2.databinding.ActivityHistorialBinding
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.example.proyectoapp2.databinding.ActivityMainBinding
 import okhttp3.*
 import java.io.IOException
 
 class HistorialActivity : AppCompatActivity() {
 
-    private lateinit var binding : HistorialActivityBinding
+    private lateinit var binding : ActivityHistorialBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = HistorialActivityBinding.inflate(layoutInflater)
+        binding = ActivityHistorialBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
         binding.btnActualizar.setOnClickListener {
             realizarSolicitudHttp()
+        }
+
+        binding.volverBtn.setOnClickListener {
+            finish()
         }
     }
 
@@ -29,7 +36,7 @@ class HistorialActivity : AppCompatActivity() {
         OkHttpClient().newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 runOnUiThread {
-                    binding. = "Error al realizar la solicitud: ${e.message}"
+                    binding.dato1.text = "Error al realizar la solicitud: ${e.message}"
                 }
             }
 

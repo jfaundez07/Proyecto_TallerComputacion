@@ -1,8 +1,8 @@
 package com.example.proyectoapp2
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-
 import android.widget.Button
 import android.widget.TextView
 import com.example.proyectoapp2.databinding.ActivityMainBinding
@@ -20,6 +20,13 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
+        binding.btnHistorial.setOnClickListener {
+
+            val intent = Intent(this, HistorialActivity::class.java)
+            startActivity(intent)
+        }
+
         binding.btnActualizar.setOnClickListener {
             realizarSolicitudHttp()
         }
