@@ -68,7 +68,7 @@ class MainActivity : AppCompatActivity() {
                         }
 
                         // Verificar si la temperatura es 55 o superior
-                        if (temperatura >= 35) {
+                        if (temperatura >= 50) {
                             // Most rar una alerta o ventana emergente en el hilo principal
                             val handler = Handler(Looper.getMainLooper())
                             handler.post {
