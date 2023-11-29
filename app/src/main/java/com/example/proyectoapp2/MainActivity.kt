@@ -4,8 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import android.widget.Button
-import android.widget.TextView
+import android.os.Looper
 import androidx.appcompat.app.AlertDialog
 import com.example.proyectoapp2.databinding.ActivityMainBinding
 import com.google.gson.Gson
@@ -72,7 +71,7 @@ class MainActivity : AppCompatActivity() {
 
 
                         runOnUiThread {
-                            tvResultado.text = resultadoFormateado
+                            binding.tvResultado.text = resultadoFormateado
                         }
 
 
@@ -84,7 +83,7 @@ class MainActivity : AppCompatActivity() {
                         }
                     } else {
                         runOnUiThread {
-                            tvResultado.text = "Error al analizar la respuesta del servidor"
+                            binding.tvResultado.text = "Error al analizar la respuesta del servidor"
                         }
                     }
                 }
