@@ -45,17 +45,19 @@ class MainActivity : AppCompatActivity() {
                 runOnUiThread {
                     if (datosSensoresList.size >= 10) {
                         binding.dato1.text = formatData(datosSensoresList[0])
-                        binding.dato1.textSize = 10f
+                        binding.dato1.textSize = 12f
                         binding.dato2.text = formatData(datosSensoresList[1])
-                        binding.dato2.textSize = 10f
+                        binding.dato2.textSize = 12f
                         binding.dato3.text = formatData(datosSensoresList[2])
-                        binding.dato3.textSize = 10f
+                        binding.dato3.textSize = 12f
                         binding.dato4.text = formatData(datosSensoresList[3])
-                        binding.dato4.textSize = 10f
+                        binding.dato4.textSize = 12f
                         binding.dato5.text = formatData(datosSensoresList[4])
-                        binding.dato5.textSize = 10f
+                        binding.dato5.textSize = 12f
                         binding.dato6.text = formatData(datosSensoresList[5])
-                        binding.dato6.textSize = 10f
+                        binding.dato6.textSize = 12f
+                        binding.dato7.text = formatData(datosSensoresList[7])
+                        binding.dato7.textSize = 12f
                     } else {
                         binding.dato1.text = "No se encontraron suficientes datos"
                     }
