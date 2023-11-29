@@ -2,6 +2,8 @@ package com.example.proyectoapp2
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 
 import android.widget.Button
 import android.widget.TextView
@@ -67,8 +69,11 @@ class MainActivity : AppCompatActivity() {
 
                         // Verificar si la temperatura es 55 o superior
                         if (temperatura >= 35) {
-                            // Mostrar una alerta o ventana emergente
-                            mostrarAlerta("Temperatura Alta", "La temperatura es $temperatura °C. ¡Cuidado!")
+                            // Most rar una alerta o ventana emergente en el hilo principal
+                            val handler = Handler(Looper.getMainLooper())
+                            handler.post {
+                                mostrarAlerta("Temperatura Alta", "La temperatura es $temperatura °C. ¡Cuidado!")
+                            }
                         }
                     } else {
                         runOnUiThread {
