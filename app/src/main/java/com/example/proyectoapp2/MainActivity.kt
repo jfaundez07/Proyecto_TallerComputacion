@@ -67,12 +67,10 @@ class MainActivity : AppCompatActivity() {
                             tvResultado.text = resultadoFormateado
                         }
 
-                        // Verificar si la temperatura es 55 o superior
                         if (temperatura >= 50) {
-                            // Most rar una alerta o ventana emergente en el hilo principal
                             val handler = Handler(Looper.getMainLooper())
                             handler.post {
-                                mostrarAlerta("Temperatura Alta", "La temperatura es $temperatura °C. ¡Cuidado!")
+                                mostrarAlerta("Temperatura Alta", "La temperatura es $temperatura °C")
                             }
                         }
                     } else {
