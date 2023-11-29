@@ -5,7 +5,6 @@ import android.os.Bundle
 import com.example.proyectoapp2.databinding.ActivityHistorialBinding
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.example.proyectoapp2.databinding.ActivityMainBinding
 import okhttp3.*
 import java.io.IOException
 
@@ -17,6 +16,8 @@ class HistorialActivity : AppCompatActivity() {
         binding = ActivityHistorialBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
+        realizarSolicitudHttp()
 
         binding.btnActualizar.setOnClickListener {
             realizarSolicitudHttp()

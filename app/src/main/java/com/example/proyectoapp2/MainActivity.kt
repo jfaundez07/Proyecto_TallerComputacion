@@ -15,12 +15,16 @@ import java.io.IOException
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding:ActivityMainBinding
+    private val handler = Handler(Looper.getMainLooper())
+    private val updateInterval = 5000L // Intervalo de actualización en milisegundos
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
+        realizarSolicitudHttp()
 
         binding.btnHistorial.setOnClickListener {
 
@@ -31,6 +35,8 @@ class MainActivity : AppCompatActivity() {
         binding.btnActualizar.setOnClickListener {
             realizarSolicitudHttp()
         }
+        iniciarActualizacionAutomatica()
+
     }
 
     private fun realizarSolicitudHttp() {
@@ -89,6 +95,22 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
+    }
+
+    private fun iniciarActualizacionAutomatica() {
+        // Ejecutar la solicitud HTTP automáticamente cada 5 segundos
+        handler.postDelayed(object : Runnable {
+            override fun run() {
+                realizarSolicitudHttp()
+                handler.postDelayed(this, updateInterval) // Llamar nuevamente después del intervalo
+            }
+        }, updateInterval) // Iniciar después del intervalo
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        // Detener la actualización automática al destruir la actividad
+        handler.removeCallbacksAndMessages(null)
     }
 
     private fun mostrarAlerta(titulo: String, mensaje: String) {
