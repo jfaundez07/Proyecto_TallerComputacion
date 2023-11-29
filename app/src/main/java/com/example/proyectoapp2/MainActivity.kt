@@ -5,6 +5,7 @@ import android.os.Bundle
 
 import android.widget.Button
 import android.widget.TextView
+import com.example.proyectoapp2.databinding.ActivityMainBinding
 import com.google.gson.Gson
 import okhttp3.*
 import java.io.IOException
@@ -12,17 +13,14 @@ import java.io.IOException
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var btnActualizar: Button
-    private lateinit var tvResultado: TextView
+    private lateinit var binding:ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
-        btnActualizar = findViewById(R.id.btnActualizar)
-        tvResultado = findViewById(R.id.tvResultado)
-
-        btnActualizar.setOnClickListener {
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
+        binding.btnActualizar.setOnClickListener {
             realizarSolicitudHttp()
         }
     }
@@ -38,7 +36,7 @@ class MainActivity : AppCompatActivity() {
 
             override fun onFailure(call: Call, e: IOException) {
                 runOnUiThread {
-                    tvResultado.text = "Error al realizar la solicitud: ${e.message}"
+                    binding.tvResultado.text = "Error al realizar la solicitud: ${e.message}"
                 }
             }
 
@@ -58,18 +56,14 @@ class MainActivity : AppCompatActivity() {
                                                 "-> PM10:               ${datosSensores.PM10} [ug/m3]"
 
                     runOnUiThread {
-                        tvResultado.text = resultadoFormateado
+                        binding.tvResultado.text = resultadoFormateado
                     }
 
                 } else {
                     runOnUiThread {
-                        tvResultado.text = "Error al analizar la respuesta del servidor"
+                        binding.tvResultado.text = "Error al analizar la respuesta del servidor"
                     }
                 }
-
-
-
-
             }
         })
     }
