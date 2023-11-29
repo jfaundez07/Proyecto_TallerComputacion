@@ -68,7 +68,7 @@ class MainActivity : AppCompatActivity() {
     private fun formatData(data: DatosSensores): String {
         return "Temperatura: ${data.Temperatura} °C" +
                 "Humedad: ${data.Humedad} %\n" +
-                "PM25: ${data.PM25} [ug/m3]\n" +
+                "PM25: ${data.PM25} [ug/m3]" +
                 "PM10: ${data.PM10} [ug/m3]"
     }
     data class DatosSensores(
