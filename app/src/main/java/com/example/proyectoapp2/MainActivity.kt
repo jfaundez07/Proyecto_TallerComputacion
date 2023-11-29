@@ -62,11 +62,10 @@ class MainActivity : AppCompatActivity() {
 
     // Método para formatear los datos
     private fun formatData(data: DatosSensores): String {
-        return "Ultima lectura obtenida:\n\n" +
-                "-> Temperatura: ${data.Temperatura} °C\n" +
-                "-> Humedad: ${data.Humedad} %\n" +
-                "-> PM25: ${data.PM25} [ug/m3]\n" +
-                "-> PM10: ${data.PM10} [ug/m3]"
+        return "Temperatura: ${data.Temperatura} °C" +
+                "Humedad: ${data.Humedad} %\n" +
+                "PM25: ${data.PM25} [ug/m3]\n" +
+                "PM10: ${data.PM10} [ug/m3]"
     }
     data class DatosSensores(
         val Temperatura: Double?,
