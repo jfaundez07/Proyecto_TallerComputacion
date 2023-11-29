@@ -25,14 +25,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun realizarSolicitudHttp() {
-
         val url = "http://44.219.124.55:8081/GETLASTTEN"
         val request = Request.Builder()
             .url(url)
             .build()
 
         OkHttpClient().newCall(request).enqueue(object : Callback {
-
             override fun onFailure(call: Call, e: IOException) {
                 runOnUiThread {
                     binding.dato1.text = "Error al realizar la solicitud: ${e.message}"
@@ -42,12 +40,34 @@ class MainActivity : AppCompatActivity() {
             override fun onResponse(call: Call, response: Response) {
                 val jsonData = response.body?.string()
                 val gson = Gson()
-                val datosSensores: DatosSensores = gson.fromJson(jsonData, DatosSensores::class.java)
+                val datosSensoresList: List<DatosSensores> = gson.fromJson(
+                    jsonData,
+                    object : TypeToken<List<DatosSensores>>() {}.type
+                )
+
                 runOnUiThread {
-                    binding.dato1.text = jsonData
+                    if (datosSensoresList.size >= 10) {
+                        binding.dato1.text = formatData(datosSensoresList[0])
+                        binding.dato2.text = formatData(datosSensoresList[1])
+                        binding.dato3.text = formatData(datosSensoresList[2])
+                        binding.dato4.text = formatData(datosSensoresList[2])
+                        binding.dato5.text = formatData(datosSensoresList[2])
+                        binding.dato6.text = formatData(datosSensoresList[2])
+                    } else {
+                        binding.dato1.text = "No se encontraron suficientes datos"
+                    }
                 }
             }
         })
+    }
+
+    // Método para formatear los datos
+    private fun formatData(data: DatosSensores): String {
+        return "Ultima lectura obtenida:\n\n" +
+                "-> Temperatura: ${data.Temperatura} °C\n" +
+                "-> Humedad: ${data.Humedad} %\n" +
+                "-> PM25: ${data.PM25} [ug/m3]\n" +
+                "-> PM10: ${data.PM10} [ug/m3]"
     }
     data class DatosSensores(
         val Temperatura: Double?,
